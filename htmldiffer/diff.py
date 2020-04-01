@@ -4,8 +4,9 @@ from .utils import html2list, add_style_str, is_tag
 from .settings import STYLE_STR, EXCLUDE_STRINGS_A, EXCLUDE_STRINGS_B, WHITELISTED_TAGS, ADD_STYLE
 
 def read_or_pass(s):
+    isfile = False
     try:
-        os.path.isfile(s)
+        isfile = os.path.isfile(s)
     except:
         data = s
     else:
