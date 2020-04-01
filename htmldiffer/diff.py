@@ -3,20 +3,23 @@ import difflib
 from .utils import html2list, add_style_str, is_tag
 from .settings import STYLE_STR, EXCLUDE_STRINGS_A, EXCLUDE_STRINGS_B, WHITELISTED_TAGS, ADD_STYLE
 
+def read_or_pass(s):
+    try:
+        os.path.isfile(s)
+    except:
+        data = s
+    else:
+        if isfile:
+            with open(s, mode='rt', encoding='utf-8') as fo:
+                data = fo.read()
+        else:
+            data = s
+    return data
 
 class HTMLDiffer:
     def __init__(self, html_a, html_b):
-        if os.path.isfile(html_a):
-            with open(html_a, "r") as file_a:
-                self.html_a = file_a.read()
-        else:
-            self.html_a = html_a
-        if os.path.isfile(html_b):
-            with open(html_b, "r") as file_b:
-                self.html_b = file_b.read()
-        else:
-            self.html_b = html_b
-
+        self.html_a = read_or_pass(html_a)
+        self.html_b = read_or_pass(html_b)
         self.deleted_diff, self.inserted_diff, self.combined_diff = self.diff()
 
     def diff(self):
