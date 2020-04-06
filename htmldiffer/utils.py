@@ -22,7 +22,7 @@ def html2list(html_string):
     out = []
 
     for c in html_string:
-        if c in ["\n", "\r", "\r\n"]:
+        if c in ["\n", "\r", "\r\n"]:   # AI approach is needed, this [elegant] shortcut comes back to bite me in CIK-0001358190-fiscal-year-2018
             continue
         if mode == 'tag':
             cur += c
