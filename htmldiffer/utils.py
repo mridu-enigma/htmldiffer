@@ -22,6 +22,8 @@ def html2list(html_string):
     out = []
 
     for c in html_string:
+        if c in ["\n", "\r", "\r\n"]:
+            continue
         if mode == 'tag':
             cur += c
             if c == '>':
