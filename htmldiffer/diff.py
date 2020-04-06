@@ -31,12 +31,14 @@ class HTMLDiffer:
             a, b = add_style_str(a, custom_style_str=STYLE_STR), add_style_str(b, custom_style_str=STYLE_STR)
 
         out = [[], [], []]
+        
+        junk_check = lambda x: x in [" \n", " \r\n", " \r"]
 
         try:
             # autojunk can cause malformed HTML, but also speeds up processing.
-            s = difflib.SequenceMatcher(None, a, b, autojunk=False)
+            s = difflib.SequenceMatcher(junk_check, a, b, autojunk=False)
         except TypeError:
-            s = difflib.SequenceMatcher(None, a, b)
+            s = difflib.SequenceMatcher(junk_check, a, b)
 
         for e in s.get_opcodes():
             old_el = a[e[1]:e[2]]
